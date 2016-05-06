@@ -1,4 +1,4 @@
-# Database Drill Sqlite Shell Part 2 
+# Database Drill: Exporting and Dumping Data 
  
 ##Learning Competencies 
 
