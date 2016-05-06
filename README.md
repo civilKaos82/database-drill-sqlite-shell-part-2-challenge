@@ -1,16 +1,16 @@
 # Database Drill: Exporting and Dumping Data 
  
-##Summary 
+## Summary 
+We're going to look at a couple approaches for sharing the data in our database.  We'll start by exporting data into another format (e.g., CSV), and we'll finish by dumping our data into another file so that we can recreate our data in another database.
 
- For this challenge we will continue using the students database and learn how to modify the data.  [Download the 'students.db' file](https://github.com/downloads/dbc-challenges/binary_store/DB02_SQL_students.db).
-
-Load up the DB file into sqlite3 - `sqlite3 students.db`.  You should now be in SQLite shell.
-
-Orient yourself by typing `.schema`.  Notice all the columns that are available to query!  See if there are other database tables by typing `.tables`.  See all the database files open by typing `.databases`.
 
 ##Releases
 
 ###Release 0 : Update and Insert
+Orient yourself by typing `.schema`.  Notice all the columns that are available to query!  See if there are other database tables by typing `.tables`.  See all the database files open by typing `.databases`.
+
+
+
 
 Update the entry that has ID number '855' with a new email address.  It should now be jared.smith@hulu.com.  Then update Valentine Hackett's phone number to 415-346-4497.  Remember the `UPDATE` function?
 
