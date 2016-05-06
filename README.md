@@ -1,10 +1,5 @@
 # Database Drill: Exporting and Dumping Data 
  
-##Learning Competencies 
-
-* Use SQLite and the SQLite console to query data
-* Use common SQL Queries to view specific data
-
 ##Summary 
 
  For this challenge we will continue using the students database and learn how to modify the data.  [Download the 'students.db' file](https://github.com/downloads/dbc-challenges/binary_store/DB02_SQL_students.db).
