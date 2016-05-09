@@ -5,10 +5,12 @@ We're going to look at a couple approaches for sharing the data in our database.
 
 
 ## Releases
-### Release 0 : Exporting and Dumping
+### Release 0:  Exporting Data to CSV
 
 Nice work!  It's time to export the whole database into a CSV file so it can be imported easily into Excel.  Use the `.help` command to figure out how to do this.  You'll need to set up the output and the mode!  Export the whole database into the file `students.csv`.  Quit out of Sqlite and view the file.  Cool?
 
+
+### Release 1: Dumping Data
 Now let's do a database dump for a backup and so you can more easily import this into other datase systems.  Open up sqlite again, and set the output file to `students_sqlite3.dump`.  Now use the `.dump` command.
 If you quit out of Sqlite again and mate the `students_sqlite3.dump` file, you'll see that it includes the create table and about 1000 insert statements.  This can recreate the students database!
 
