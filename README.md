@@ -23,6 +23,8 @@ We're going to create a dump of our database and then read it into a new databas
 The output file now contains a series of SQL statements that will recreate the students table and the data in the table.  So, let's recreate it!  Reopen the SQLite command line shell, but this time without specifying a database - just type `sqlite3`.  Then use the `.read` command to execute the SQL in our output file.  View the schema and the entries in the recreated `students` table.  Voila!  Our data has been moved from one database to another.
 
 
-##Resources
+## Conclusion
+Moving data from one database to another database or converting it to another format isn't something that we'll do everyday at Dev Bootcamp, but we should be aware of the possibility and understand conceptually what is happening.
+
 
 [SQLite]: https://www.sqlite.org/cli.html
