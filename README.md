@@ -15,15 +15,13 @@ We've received a request to provide student demographic data from our student re
 *Note:* See the file `example_results/students_in_area_code_419.csv` for expected output.
 
 
-### Release 1: Dumping Data
-Now let's do a database dump for a backup and so you can more easily import this into other datase systems.  Open up sqlite again, and set the output file to `students_sqlite3.dump`.  Now use the `.dump` command.
-If you quit out of Sqlite again and mate the `students_sqlite3.dump` file, you'll see that it includes the create table and about 1000 insert statements.  This can recreate the students database!
+### Release 1:  Dumping Data
+Databases also provide methods for *dumping* their data: the database can output a series of SQL queries that could be used to recreate the database.  The output can be used as a backup or as a way of importing data into another database.
 
-So let's do it!  Go back into sqlite, but this time without loading a database - just type `sqlite3`.  Then type `.read students_sqlite3.dump`.  View the schema.  View all the database entries.    Voila!
+We're going to create a dump of our database and then read it into a new database.  To begin, open the SQLite command line shell connected to our student records database.  Set up the `.output` to write to a file (e.g., `student_records.dump`) and then use the `.dump` command to create the database dump.  Close the SQLite command line shell and take a look at the output file.
 
-Quit out of sqlite, do `subl sql_history.txt`, and paste the history of all your SQL commands into the source file `sqlite_shell_2.md`
+The output file now contains a series of SQL statements that will recreate the students table and the data in the table.  So, let's recreate it!  Reopen the SQLite command line shell, but this time without specifying a database - just type `sqlite3`.  Then use the `.read` command to execute the SQL in our output file.  View the schema and the entries in the recreated `students` table.  Voila!  Our data has been moved from one database to another.
 
-<!-- ##Optimize Your Learning  -->
 
 ##Resources
 
