@@ -5,9 +5,14 @@ We're going to look at a couple approaches for sharing the data in our database.
 
 
 ## Releases
-### Release 0:  Exporting Data to CSV
+### Release 0:  Exporting Data to a File
+Sometimes we want to share data from a database without giving access to the database itself.  Perhaps our database contains sensitive information like hospital patient records that we cannot legally share.  Or, we might need to share data with someone unfamiliar with SQL or who wants to work with the data in spreadsheet software like Microsoft Excel.  What can we do?  
 
-Nice work!  It's time to export the whole database into a CSV file so it can be imported easily into Excel.  Use the `.help` command to figure out how to do this.  You'll need to set up the output and the mode!  Export the whole database into the file `students.csv`.  Quit out of Sqlite and view the file.  Cool?
+Fortunately, most databases offer utilities for exporting data to other formats.  In the [command line shell for SQLite][SQLite] we can do this by configuring (1) the `.mode`, the output format of our queries, and (2) the `.output`, where we want to write the output (e.g., a specific file).
+
+We've received a request to provide student demographic data from our student records database (`student_records.db`).  We need to provide only the gender and birthday of all students with phone numbers from area code 419 ordered from youngest to oldest.  Furthermore, we need to provide the data in a CSV file and formatted as CSV.
+
+*Note:* See the file `example_results/students_in_area_code_419.csv` for expected output.
 
 
 ### Release 1: Dumping Data
@@ -21,3 +26,5 @@ Quit out of sqlite, do `subl sql_history.txt`, and paste the history of all your
 <!-- ##Optimize Your Learning  -->
 
 ##Resources
+
+[SQLite]: https://www.sqlite.org/cli.html
