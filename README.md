@@ -1,52 +1,32 @@
-# Database Drill Sqlite Shell Part 2 
+# Database Drill: Exporting and Dumping Data 
  
-##Learning Competencies 
-
-* Use SQLite and the SQLite console to query data
-* Use common SQL Queries to view specific data
-
-##Summary 
-
- For this challenge we will continue using the students database and learn how to modify the data.  [Download the 'students.db' file](https://github.com/downloads/dbc-challenges/binary_store/DB02_SQL_students.db).
-
-Load up the DB file into sqlite3 - `sqlite3 students.db`.  You should now be in SQLite shell.
-
-Orient yourself by typing `.schema`.  Notice all the columns that are available to query!  See if there are other database tables by typing `.tables`.  See all the database files open by typing `.databases`.
-
-##Releases
-
-###Release 0 : Update and Insert
-
-Update the entry that has ID number '855' with a new email address.  It should now be jared.smith@hulu.com.  Then update Valentine Hackett's phone number to 415-346-4497.  Remember the `UPDATE` function?
-
-View the entry with ID of 855 to make sure the email address has been updated.  Check to make sure Valentine's phone number has been changed too.
-
-Now let's add a new student.  Her name is Julie Kravinski, born October 27th 1971, email julie@giants.com, phone number 415-399-5599.
+## Summary 
+We're going to look at a couple approaches for sharing the data in our database.  We'll start by exporting data into another format (e.g., CSV), and we'll finish by dumping our data into another file so that we can recreate our data in another database.
 
 
-#### SQL Shortcuts and Intricacies 
+## Releases
+### Release 0:  Exporting Data to a File
+Sometimes we want to share data from a database without giving access to the database itself.  Perhaps our database contains sensitive information like hospital patient records that we cannot legally share.  Or, we might need to share data with someone unfamiliar with SQL or who wants to work with the data in spreadsheet software like Microsoft Excel.  What can we do?  
 
-Chances are you wrote out a pretty long SQL statement to do that last `INSERT` statement to add Julie.  How could you shorten it?  Careful!  SQLite, just like PostgreSQL and MySQL, have subtle and annoying differences to the standard SQL language.  Make sure you use SQLite syntax for this!
+Fortunately, most databases offer utilities for exporting data to other formats.  In the [command line shell for SQLite][SQLite] we can do this by configuring (1) the `.mode`, the output format of our queries, and (2) the `.output`, where we want to write the output (e.g., a specific file).
 
-Write out the traditional SQL shortcut way of inserting into a table along with your SQLite version.  What is the subtle difference between the two?
+We have a database that contains data on parts that our company has ordered from our suppliers (`orders.db`).  We've received a request for a report related to the on-time performance of our suppliers.  Our Purchasing Department wants to follow up with any suppliers from whom we've ordered parts that have not arrived or that arrived late.
 
-#### Delete in SQLite
+To assist the Purchasing Department, we need to provide a CSV file with data for any ordered part that has not been received or was received after the date its order was expected.  The data in the report should include (1) the order invoice number, (2) the date the order was made, (3) the date the order was expected, (4) the date the part was received, (5) the part name, (6) the part code, (7) the order supplier's name, and (8) the supplier's phone number.  Oh, and the data should be ordered by the supplier's name and then by invoice number.
 
-Elvis Schuppe has decided to stay in the plumbing business.  Please delete him from the database.  Then delete the first 20 people in the database. Do it with ID numbers.
+*Note:* See the file `example_results/unreceived_and_late_parts.csv` for expected output.
 
-Some databases are different when selecting or deleting by ID numbers.  Some include the start/end numbers, others don't include the end number.  How does SQLite deal with ranges?
 
-###Release 1 : Exporting and Dumping
+### Release 1:  Dumping Data
+Databases also provide methods for *dumping* their data: the database can output a series of SQL queries that could be used to recreate the database.  The output can be used as a backup or as a way of importing data into another database.
 
-Nice work!  It's time to export the whole database into a CSV file so it can be imported easily into Excel.  Use the `.help` command to figure out how to do this.  You'll need to set up the output and the mode!  Export the whole database into the file `students.csv`.  Quit out of Sqlite and view the file.  Cool?
+We need to move our suppliers table and all of its data to a new database.  To do so, we're going to create a dump of our database's `suppliers` table and then read it into a new database.  To begin, open the SQLite command line shell connected to our `orders.db`.  Set up the `.output` to write to a file (e.g., `suppliers.dump`) and then use the `.dump` command to dump only the `suppliers` table.  Close the SQLite command line shell and take a look at the output file.
 
-Now let's do a database dump for a backup and so you can more easily import this into other datase systems.  Open up sqlite again, and set the output file to `students_sqlite3.dump`.  Now use the `.dump` command.
-If you quit out of Sqlite again and mate the `students_sqlite3.dump` file, you'll see that it includes the create table and about 1000 insert statements.  This can recreate the students database!
+The output file now contains a series of SQL statements that will recreate the `suppliers` table with all its data.  So, let's recreate it!  Reopen the SQLite command line shell, but this time without specifying a database—just type `sqlite3`.  Then use the `.read` command to execute the SQL in our output file.  View the schema and the entries in the recreated `suppliers` table.  Voila!  Our data has been moved from one database to another.
 
-So let's do it!  Go back into sqlite, but this time without loading a database - just type `sqlite3`.  Then type `.read students_sqlite3.dump`.  View the schema.  View all the database entries.    Voila!
 
-Quit out of sqlite, do `subl sql_history.txt`, and paste the history of all your SQL commands into the source file `sqlite_shell_2.md`
+## Conclusion
+Moving data from one database to another database or converting it to another format isn't something that we'll do everyday at Dev Bootcamp, but we should be aware of the possibility and understand conceptually what is happening.
 
-<!-- ##Optimize Your Learning  -->
 
-##Resources
+[SQLite]: https://www.sqlite.org/cli.html
